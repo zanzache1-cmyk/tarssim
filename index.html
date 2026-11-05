@@ -156,7 +156,7 @@
             <div><label>ومحتواه:</label><input type="text" name="content2"></div>
         </div>
         <div class="row">
-            <div><label>النشاط(3):</label><input type="text" name="activity3">...</div>
+            <div><label>النشاط(3):</label><input type="text" name="activity3"></div>
             <div><label>ومحتواه:</label><input type="text" name="content3"></div>
         </div>
 
@@ -172,7 +172,38 @@
   <script>
     function submitForm() {
       var form = document.getElementById('inspectorForm');
-      google.script.run.withSuccessHandler(function(msg){ alert('تم الحفظ بنجاح'); form.reset(); }).processForm(form);
+
+      var formData = {
+        school: form.querySelector('[name="school"]').value,
+        teacherName: form.querySelector('[name="teacherName"]').value,
+        level: form.querySelector('[name="level"]').value,
+        activity1: form.querySelector('[name="activity1"]').value,
+        content1: form.querySelector('[name="content1"]').value,
+        activity2: form.querySelector('[name="activity2"]').value,
+        content2: form.querySelector('[name="content2"]').value,
+        activity3: form.querySelector('[name="activity3"]').value,
+        content3: form.querySelector('[name="content3"]').value
+      };
+
+      // رابط الـ Web App الخاص بك في Google Apps Script
+      var WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwKJMM_awAPdQ34NACXk3gc535xWSWWDc3NtMwAQSiaO2FRSR6COrhtVUt31vhcx6aL/exec";
+
+      fetch(WEB_APP_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => {
+        alert('تم حفظ البيانات بنجاح في المنصة!');
+        form.reset();
+      })
+      .catch(error => {
+        console.error('Error!', error);
+        alert('حدث خطأ أثناء الإرسال، يرجى المحاولة مرة أخرى.');
+      });
     }
   </script>
 </body>
