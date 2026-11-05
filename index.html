@@ -205,6 +205,50 @@
         alert('حدث خطأ أثناء الإرسال، يرجى المحاولة مرة أخرى.');
       });
     }
+  <  <!-- التذييل مع حقوق الملكية المطلوبة -->
+  <div class="footer">
+    تصميم الأستاذ والمفتش: بلعدل محمد &nbsp;|&nbsp; كل الحقوق محفوظة 2027 ©
+  </div>
+
+  <!-- مكان وضع كود الإرسال -->
+  <script>
+    function submitForm() {
+      var form = document.getElementById('inspectorForm');
+
+      var formData = {
+        school: form.querySelector('[name="school"]').value,
+        teacherName: form.querySelector('[name="teacherName"]').value,
+        level: form.querySelector('[name="level"]').value,
+        activity1: form.querySelector('[name="activity1"]').value,
+        content1: form.querySelector('[name="content1"]').value,
+        activity2: form.querySelector('[name="activity2"]').value,
+        content2: form.querySelector('[name="content2"]').value,
+        activity3: form.querySelector('[name="activity3"]').value,
+        content3: form.querySelector('[name="content3"]').value
+      };
+
+      // رابط الـ Web App الخاص بك الذي قمت بنسخه من Google Apps Script
+      var WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwKJMM_awAPdQ34NACXk3gc535xWSWWDc3NtMwAQSiaO2FRSR6COrhtVUt31vhcx6aL/exec";
+
+      fetch(WEB_APP_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => {
+        alert('تم حفظ البيانات بنجاح في المنصة!');
+        form.reset();
+      })
+      .catch(error => {
+        console.error('Error!', error);
+        alert('حدث خطأ أثناء الإرسال، يرجى المحاولة مرة أخرى.');
+      });
+    }
   </script>
+</body>
+</html>>
 </body>
 </html>
